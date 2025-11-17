@@ -150,19 +150,34 @@ const Index = () => {
       </header>
 
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr_340px] gap-6">
-          <aside className="space-y-6 animate-fade-in">
-            <Card className="overflow-hidden sticky top-24">
-              <CardContent className="p-6 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_320px] gap-6">
+          <aside className="space-y-4 animate-fade-in">
+            <Card className="sticky top-24">
+              <CardContent className="p-5 space-y-5">
                 <div>
                   <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
                     <Icon name="SlidersHorizontal" size={20} />
-                    Фильтры
+                    Фильтры и сортировка
                   </h3>
                   
                   <div className="space-y-4">
                     <div>
-                      <h4 className="font-medium mb-3 text-sm">Размер</h4>
+                      <h4 className="font-medium mb-3 text-sm text-foreground">Сортировка по цене</h4>
+                      <Select value={sortBy} onValueChange={setSortBy}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Выберите" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="price-asc">По возрастанию</SelectItem>
+                          <SelectItem value="price-desc">По убыванию</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <Separator />
+
+                    <div>
+                      <h4 className="font-medium mb-3 text-sm text-foreground">Размер</h4>
                       <div className="space-y-2">
                         {['S', 'M', 'L', 'XL', 'XXL'].map(size => (
                           <div key={size} className="flex items-center space-x-2">
@@ -290,23 +305,14 @@ const Index = () => {
               <h2 className="text-2xl font-semibold">
                 Каталог <span className="text-muted-foreground text-lg">({sortedProducts.length})</span>
               </h2>
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-[200px]">
-                  <SelectValue placeholder="Сортировка" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="price-asc">Цена: по возрастанию</SelectItem>
-                  <SelectItem value="price-desc">Цена: по убыванию</SelectItem>
-                </SelectContent>
-              </Select>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {sortedProducts.map((product, index) => (
                 <Card 
                   key={product.id} 
                   className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-fade-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   <div className="aspect-[3/4] overflow-hidden bg-muted">
                     <img
@@ -315,8 +321,8 @@ const Index = () => {
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <CardContent className="p-5 space-y-3">
-                    <h3 className="font-semibold text-lg">{product.name}</h3>
+                  <CardContent className="p-4 space-y-2.5">
+                    <h3 className="font-semibold text-base leading-tight">{product.name}</h3>
                     <div className="flex items-center gap-2 flex-wrap">
                       <Badge variant="secondary" className="text-xs">
                         {product.season === 'winter' ? 'Зимняя' : 'Межсезонная'}
@@ -325,19 +331,19 @@ const Index = () => {
                         {product.filling === 'natural' ? 'Натур.' : 'Синт.'}
                       </Badge>
                     </div>
-                    <div className="flex items-center justify-between pt-2">
-                      <span className="text-2xl font-bold text-primary">
+                    <div className="flex items-center justify-between pt-1.5">
+                      <span className="text-xl font-bold text-primary">
                         {product.price.toLocaleString('ru-RU')} ₽
                       </span>
                       {product.availability[selectedStore] ? (
-                        <Badge className="bg-green-500/10 text-green-700 hover:bg-green-500/20">
-                          <Icon name="Check" size={14} className="mr-1" />
-                          В наличии
+                        <Badge className="bg-green-500/10 text-green-700 hover:bg-green-500/20 text-xs">
+                          <Icon name="Check" size={13} className="mr-1" />
+                          Есть
                         </Badge>
                       ) : (
-                        <Badge variant="secondary" className="text-muted-foreground">
-                          <Icon name="X" size={14} className="mr-1" />
-                          Нет в наличии
+                        <Badge variant="secondary" className="text-muted-foreground text-xs">
+                          <Icon name="X" size={13} className="mr-1" />
+                          Нет
                         </Badge>
                       )}
                     </div>
