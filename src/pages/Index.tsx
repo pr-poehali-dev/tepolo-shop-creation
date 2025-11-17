@@ -150,9 +150,9 @@ const Index = () => {
       </header>
 
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_320px] gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr_340px] gap-6">
           <aside className="space-y-6 animate-fade-in">
-            <Card className="overflow-hidden">
+            <Card className="overflow-hidden sticky top-24">
               <CardContent className="p-6 space-y-6">
                 <div>
                   <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
@@ -355,21 +355,21 @@ const Index = () => {
           </main>
 
           <aside className="space-y-6 animate-fade-in">
-            <Card>
-              <CardContent className="p-6 space-y-4">
-                <h3 className="font-semibold text-lg flex items-center gap-2">
-                  <Icon name="MapPin" size={20} />
+            <Card className="sticky top-24">
+              <CardContent className="p-6 space-y-5">
+                <h3 className="font-semibold text-xl flex items-center gap-2">
+                  <Icon name="MapPin" size={22} />
                   Выбор магазина
                 </h3>
                 
                 <div>
-                  <Label className="text-sm mb-2 block">Город</Label>
+                  <Label className="text-sm font-medium mb-3 block">Город</Label>
                   <Select value={selectedCity} onValueChange={(value) => {
                     setSelectedCity(value);
                     const firstStore = stores.find(s => s.city === value);
                     if (firstStore) setSelectedStore(`${firstStore.city}, ${firstStore.address}`);
                   }}>
-                    <SelectTrigger>
+                    <SelectTrigger className="h-11">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -379,8 +379,10 @@ const Index = () => {
                   </Select>
                 </div>
 
+                <Separator />
+
                 <div>
-                  <Label className="text-sm mb-2 block">Адрес магазина</Label>
+                  <Label className="text-sm font-medium mb-3 block">Адреса магазинов</Label>
                   <div className="space-y-2">
                     {cityStores.map(store => {
                       const storeId = `${store.city}, ${store.address}`;
@@ -388,11 +390,11 @@ const Index = () => {
                         <Button
                           key={storeId}
                           variant={selectedStore === storeId ? 'default' : 'outline'}
-                          className="w-full justify-start text-left h-auto py-3"
+                          className="w-full justify-start text-left h-auto py-3.5 px-4 font-normal"
                           onClick={() => setSelectedStore(storeId)}
                         >
-                          <Icon name="Store" size={16} className="mr-2 flex-shrink-0" />
-                          <span className="text-sm">{store.address}</span>
+                          <Icon name="Store" size={18} className="mr-3 flex-shrink-0" />
+                          <span>{store.address}</span>
                         </Button>
                       );
                     })}
@@ -402,28 +404,33 @@ const Index = () => {
                 <Separator />
 
                 <div>
-                  <Label className="text-sm mb-3 block">Карта магазинов</Label>
-                  <div className="aspect-square bg-muted rounded-lg overflow-hidden relative">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center space-y-2 p-4">
-                        <Icon name="Map" size={48} className="mx-auto text-muted-foreground" />
-                        <p className="text-sm text-muted-foreground">
-                          {selectedCity === 'Москва' ? 'Москва' : 'Санкт-Петербург'}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {cityStores.length} {cityStores.length === 1 ? 'магазин' : 'магазина'}
-                        </p>
+                  <Label className="text-sm font-medium mb-3 block">Карта магазинов</Label>
+                  <div className="aspect-square bg-muted rounded-xl overflow-hidden relative border border-border">
+                    <div className="absolute inset-0 bg-gradient-to-br from-muted via-background to-muted">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center space-y-3 p-4">
+                          <Icon name="Map" size={56} className="mx-auto text-muted-foreground/50" />
+                          <div>
+                            <p className="text-base font-medium text-foreground">
+                              {selectedCity === 'Москва' ? 'Москва' : 'Санкт-Петербург'}
+                            </p>
+                            <p className="text-sm text-muted-foreground mt-1">
+                              {cityStores.length} {cityStores.length === 1 ? 'магазин' : 'магазина'}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     {cityStores.map((store, idx) => (
                       <div
                         key={idx}
-                        className="absolute w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold text-sm shadow-lg animate-scale-in"
+                        className="absolute w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-xl border-2 border-background animate-scale-in cursor-pointer hover:scale-110 transition-transform"
                         style={{
-                          left: `${20 + idx * 30}%`,
-                          top: `${30 + idx * 25}%`,
-                          animationDelay: `${idx * 0.2}s`
+                          left: `${25 + idx * 25}%`,
+                          top: `${35 + idx * 20}%`,
+                          animationDelay: `${idx * 0.15}s`
                         }}
+                        title={store.address}
                       >
                         {idx + 1}
                       </div>
