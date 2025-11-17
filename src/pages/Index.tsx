@@ -150,7 +150,7 @@ const Index = () => {
       </header>
 
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_320px] gap-6">
+        <div className="grid grid-cols-[280px_1fr_320px] gap-6">
           <aside className="space-y-4 animate-fade-in">
             <Card className="sticky top-24">
               <CardContent className="p-5 space-y-5">
