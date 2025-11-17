@@ -93,6 +93,78 @@ const products: Product[] = [
     season: 'winter',
     style: 'coat',
     availability: { 'Москва, Тверская 12': true, 'Москва, Арбат 45': false, 'СПб, Невский 88': true }
+  },
+  {
+    id: 7,
+    name: 'Куртка пуховая коричневая',
+    price: 19500,
+    image: 'https://cdn.poehali.dev/projects/c98921fb-a37d-448c-b8ce-51bada2a57fb/files/67124257-ae37-4540-a328-2db2d745547b.jpg',
+    size: ['M', 'L', 'XL', 'XXL'],
+    color: ['Коричневый', 'Терракотовый'],
+    filling: 'natural',
+    season: 'winter',
+    style: 'jacket',
+    availability: { 'Москва, Тверская 12': true, 'Москва, Арбат 45': true, 'СПб, Невский 88': true }
+  },
+  {
+    id: 8,
+    name: 'Плащ классический бежевый',
+    price: 13900,
+    image: 'https://cdn.poehali.dev/projects/c98921fb-a37d-448c-b8ce-51bada2a57fb/files/e8374ebb-2cb8-4c07-8bd6-ec2c104b7e7d.jpg',
+    size: ['S', 'M', 'L', 'XL'],
+    color: ['Бежевый', 'Кремовый'],
+    filling: 'synthetic',
+    season: 'demiseason',
+    style: 'trench',
+    availability: { 'Москва, Тверская 12': false, 'Москва, Арбат 45': true, 'СПб, Невский 88': true }
+  },
+  {
+    id: 9,
+    name: 'Дождевик спортивный кремовый',
+    price: 7500,
+    image: 'https://cdn.poehali.dev/projects/c98921fb-a37d-448c-b8ce-51bada2a57fb/files/bea7a545-c909-4452-b2b0-332f1022c2dd.jpg',
+    size: ['S', 'M', 'L'],
+    color: ['Кремовый', 'Бежевый'],
+    filling: 'synthetic',
+    season: 'demiseason',
+    style: 'raincoat',
+    availability: { 'Москва, Тверская 12': true, 'Москва, Арбат 45': true, 'СПб, Невский 88': false }
+  },
+  {
+    id: 10,
+    name: 'Пальто удлиненное терракотовое',
+    price: 21900,
+    image: 'https://cdn.poehali.dev/projects/c98921fb-a37d-448c-b8ce-51bada2a57fb/files/67124257-ae37-4540-a328-2db2d745547b.jpg',
+    size: ['M', 'L', 'XL'],
+    color: ['Терракотовый', 'Коричневый'],
+    filling: 'natural',
+    season: 'winter',
+    style: 'coat',
+    availability: { 'Москва, Тверская 12': true, 'Москва, Арбат 45': false, 'СПб, Невский 88': true }
+  },
+  {
+    id: 11,
+    name: 'Куртка легкая бежевая',
+    price: 9900,
+    image: 'https://cdn.poehali.dev/projects/c98921fb-a37d-448c-b8ce-51bada2a57fb/files/e8374ebb-2cb8-4c07-8bd6-ec2c104b7e7d.jpg',
+    size: ['S', 'M', 'L', 'XL'],
+    color: ['Бежевый', 'Кремовый'],
+    filling: 'synthetic',
+    season: 'demiseason',
+    style: 'jacket',
+    availability: { 'Москва, Тверская 12': true, 'Москва, Арбат 45': true, 'СПб, Невский 88': true }
+  },
+  {
+    id: 12,
+    name: 'Плащ с капюшоном кремовый',
+    price: 14500,
+    image: 'https://cdn.poehali.dev/projects/c98921fb-a37d-448c-b8ce-51bada2a57fb/files/bea7a545-c909-4452-b2b0-332f1022c2dd.jpg',
+    size: ['M', 'L', 'XL'],
+    color: ['Кремовый', 'Бежевый'],
+    filling: 'synthetic',
+    season: 'demiseason',
+    style: 'trench',
+    availability: { 'Москва, Тверская 12': false, 'Москва, Арбат 45': true, 'СПб, Невский 88': true }
   }
 ];
 
@@ -150,7 +222,7 @@ const Index = () => {
       </header>
 
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-[280px_1fr_320px] gap-6">
+        <div className="grid grid-cols-[240px_1fr_260px] gap-6">
           <aside className="space-y-4 animate-fade-in">
             <Card className="sticky top-24">
               <CardContent className="p-5 space-y-5">
@@ -307,12 +379,12 @@ const Index = () => {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="grid grid-cols-2 gap-5">
               {sortedProducts.map((product, index) => (
                 <Card 
                   key={product.id} 
                   className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-fade-in"
-                  style={{ animationDelay: `${index * 0.05}s` }}
+                  style={{ animationDelay: `${index * 0.04}s` }}
                 >
                   <div className="aspect-[3/4] overflow-hidden bg-muted">
                     <img
@@ -321,8 +393,8 @@ const Index = () => {
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <CardContent className="p-4 space-y-2.5">
-                    <h3 className="font-semibold text-base leading-tight">{product.name}</h3>
+                  <CardContent className="p-5 space-y-3">
+                    <h3 className="font-semibold text-lg leading-tight">{product.name}</h3>
                     <div className="flex items-center gap-2 flex-wrap">
                       <Badge variant="secondary" className="text-xs">
                         {product.season === 'winter' ? 'Зимняя' : 'Межсезонная'}
@@ -331,18 +403,18 @@ const Index = () => {
                         {product.filling === 'natural' ? 'Натур.' : 'Синт.'}
                       </Badge>
                     </div>
-                    <div className="flex items-center justify-between pt-1.5">
-                      <span className="text-xl font-bold text-primary">
+                    <div className="flex items-center justify-between pt-2">
+                      <span className="text-2xl font-bold text-primary">
                         {product.price.toLocaleString('ru-RU')} ₽
                       </span>
                       {product.availability[selectedStore] ? (
-                        <Badge className="bg-green-500/10 text-green-700 hover:bg-green-500/20 text-xs">
-                          <Icon name="Check" size={13} className="mr-1" />
+                        <Badge className="bg-green-500/10 text-green-700 hover:bg-green-500/20">
+                          <Icon name="Check" size={14} className="mr-1" />
                           Есть
                         </Badge>
                       ) : (
-                        <Badge variant="secondary" className="text-muted-foreground text-xs">
-                          <Icon name="X" size={13} className="mr-1" />
+                        <Badge variant="secondary" className="text-muted-foreground">
+                          <Icon name="X" size={14} className="mr-1" />
                           Нет
                         </Badge>
                       )}
